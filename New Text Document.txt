@@ -1,0 +1,15 @@
+var net = require('net');
+
+var server = net.createServer();
+
+server.on('error',function(err){
+	console.log('server error:', err.message);
+
+});
+
+server.on('close',function(){
+	console.log('server closed');
+
+});
+
+server.listen(4001);
