@@ -11,6 +11,13 @@ server.on('connection', function(socket){
 
 	socket.on('data',function(data){
 		console.log('got data:',data);
+
+		
+		sockets.forEach(fucntion(otherSocket){
+			if(otherSocket!==socket){
+				otherSocket.write(data);
+			}
+		});
 	});
 	
 });
