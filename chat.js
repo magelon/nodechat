@@ -2,8 +2,13 @@
 
 var server = net.createServer();
 
+var sockets = [];
+
 server.on('connection', function(socket){
 	console.log('got a new connection');
+
+	sockets.push(socket);
+
 	socket.on('data',function(data){
 		console.log('got data:',data);
 	});
