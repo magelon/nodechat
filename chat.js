@@ -1,30 +1,23 @@
 ﻿var net = require('net');
-
 var server = net.createServer();
-
-server.on('connection', function(socket){
-	console.log('got a new connection');
-	socket.on('data',function(data){
-		console.log('got data:',data);
-
-		
-		sockets.forEach(fucntion(otherSocket){
-			if(otherSocket!==socket){
-				otherSocket.write(data);
-			}
-		});
-	});
-	
-});
-
-server.on('error',function(err){
-	console.log('server error:', err.message);
+var sockets = [];
+server.on('connection', function(socket) {
+ console.log('got a new connection');
+ sockets.push(socket);
+ socket.on('data', function(data) {
+ console.log('got data:', data);
+ sockets.forEach(function(otherSocket) {
+ if (otherSocket !== socket) {
+ otherSocket.write(data);
+}
+ });
+ });
 
 });
-
-server.on('close',function(){
-	console.log('server closed');
-
+server.on('error', function(err) {
+ console.log('Server error:', err.message);
 });
-
+server.on('close', function() {
+ console.log('Server closed');
+});
 server.listen(4001);
