@@ -4,6 +4,7 @@ var sockets = [];
 	server.on('connection', function(socket) {
  	console.log('got a new connection');
  	sockets.push(socket);
+		socket.write('welcome to node chat');
  	socket.on('data', function(data) {
  	console.log('got data:', data);
 	 sockets.forEach(function(otherSocket) {
